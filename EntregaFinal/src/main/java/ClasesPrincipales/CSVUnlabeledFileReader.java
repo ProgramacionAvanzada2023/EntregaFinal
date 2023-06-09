@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CSVUnlabeledFileReader extends ReaderTemplate {
     public Table table;
-    private BufferedReader bufferLectura;
+    protected BufferedReader bufferLectura;
     public CSVUnlabeledFileReader(){
         super();
         table = new Table();
@@ -22,10 +22,9 @@ public class CSVUnlabeledFileReader extends ReaderTemplate {
             e.printStackTrace();
         }
     }
-
     @Override
     void processHeaders(String headers) {
-        List<String> cabecera = Arrays.stream(headers.split(SEPARADOR)).toList();
+        List<String> cabecera = Arrays.stream(headers.split(SEPARADOR)).collect(Collectors.toList());
         table.setHeaders(cabecera);
     }
     @Override

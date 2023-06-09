@@ -21,7 +21,7 @@ public class Csv {
             String linea = bufferLectura.readLine();
             //Primero leemos la cabecera si el fichero no está vacío
             if(linea != null){
-                List<String> headers = Arrays.stream(linea.split(SEPARADOR)).toList();
+                List<String> headers = Arrays.stream(linea.split(SEPARADOR)).collect(Collectors.toList());
                 tabla.setHeaders(headers);
                 linea = bufferLectura.readLine();
             }
@@ -67,7 +67,7 @@ public class Csv {
             String linea = bufferLectura.readLine();
             //Primero leemos la cabecera si el fichero no está vacío
             if(linea != null){
-                List<String> headers = Arrays.stream(linea.split(SEPARADOR)).toList();
+                List<String> headers = Arrays.stream(linea.split(SEPARADOR)).collect(Collectors.toList());
                 tabla.setHeaders(headers);
                 linea = bufferLectura.readLine();
             }

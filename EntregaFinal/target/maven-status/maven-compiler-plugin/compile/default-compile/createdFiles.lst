@@ -1,3 +1,4 @@
+ClasesPrincipales\CSVLabeledFileReader.class
 Vista\Vista.class
 ClasesDistancias\EuclideanDistance.class
 ClasesPrincipales\ReaderTemplate.class
@@ -6,15 +7,19 @@ ClasesDistancias\DistanceClient.class
 Vista\ImplementacionVista.class
 ClasesPrincipales\KNN.class
 module-info.class
+Principal\App.class
 ClasesPrincipales\AlgorithmEnum.class
 ClasesPrincipales\Algorithm.class
 ClasesPrincipales\RecSys.class
+ClasesPrincipales\Csv.class
 ClasesPrincipales\InvalidKException.class
 Modelo\Modelo.class
+ClasesPrincipales\SongRecSys.class
 ClasesPrincipales\Row.class
 Controlador\ImplementacionControlador.class
 Modelo\ImplementacionModelo.class
 ClasesPrincipales\Table.class
+ClasesPrincipales\CSVUnlabeledFileReader.class
 ClasesPrincipales\RowWithLabel.class
 Principal\SystemInfo.class
 ClasesDistancias\DistanceEnum.class
