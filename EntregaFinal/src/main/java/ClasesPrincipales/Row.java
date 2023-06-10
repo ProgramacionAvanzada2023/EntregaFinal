@@ -6,10 +6,10 @@ public class Row {
     private List<Double> fila;
 
     public Row(List<Double> fila) {
+        super();
         this.fila = fila;
     }
 
-    public Row(){ super(); }
     public List<Double> getFila() {
         return fila;
     }

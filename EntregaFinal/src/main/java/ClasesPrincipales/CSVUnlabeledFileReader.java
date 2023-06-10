@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CSVUnlabeledFileReader extends ReaderTemplate {
-    public Table table;
     protected BufferedReader bufferLectura;
+    public Table tabla;
     public CSVUnlabeledFileReader(){
         super();
-        table = new Table();
+        this.tabla = new Table();
     }
     @Override
     void openSource(String source) {
@@ -25,7 +25,7 @@ public class CSVUnlabeledFileReader extends ReaderTemplate {
     @Override
     void processHeaders(String headers) {
         List<String> cabecera = Arrays.stream(headers.split(SEPARADOR)).collect(Collectors.toList());
-        table.setHeaders(cabecera);
+        tabla.setHeaders(cabecera);
     }
     @Override
     void processData(String data) {
@@ -34,7 +34,7 @@ public class CSVUnlabeledFileReader extends ReaderTemplate {
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         Row fila = new Row(listaCampos);
-        table.addFilas(fila);
+        tabla.addFilas(fila);
     }
 
     @Override

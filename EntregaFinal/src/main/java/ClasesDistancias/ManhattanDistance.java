@@ -9,9 +9,9 @@ public class ManhattanDistance implements Distance{
         return calculardistanciaManhattan(p,q);
     }
 
-    private static Double calculardistanciaManhattan(List<Double> distancia1, List<Double> distancia2){
+    private static double calculardistanciaManhattan(List<Double> distancia1, List<Double> distancia2){
         int pos = 0;
-        Double suma = 0D;
+        double suma = 0D;
         int minTamanyo = Math.min(distancia1.size(), distancia2.size());
         while ( pos < minTamanyo){
             suma += Math.abs(distancia2.get(pos) - distancia1.get(pos));

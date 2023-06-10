@@ -7,10 +7,10 @@ ClasesDistancias\DistanceClient.class
 Vista\ImplementacionVista.class
 ClasesPrincipales\KNN.class
 module-info.class
-Principal\App.class
 ClasesPrincipales\AlgorithmEnum.class
 ClasesPrincipales\Algorithm.class
 ClasesPrincipales\RecSys.class
+Vista\ImplementacionVista$1.class
 ClasesPrincipales\Csv.class
 ClasesPrincipales\InvalidKException.class
 Modelo\Modelo.class

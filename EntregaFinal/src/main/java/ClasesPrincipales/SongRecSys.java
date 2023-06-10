@@ -37,12 +37,12 @@ public class SongRecSys {
             CSVLabeledFileReader csv = new CSVLabeledFileReader();
 
             csv.readTableFromSource(filenames.get("knn" + stage));
-            TableWithLabels tablaKnn = (TableWithLabels) csv.table;
+            TableWithLabels tablaKnn = (TableWithLabels) csv.tabla;
             tables.put("knn" + stage,tablaKnn);
 
             csv = new CSVLabeledFileReader();
             csv.readTableFromSource(filenames.get("kmeans" + stage));
-            TableWithLabels tablaKmeans = (TableWithLabels) csv.table;
+            TableWithLabels tablaKmeans = (TableWithLabels) csv.tabla;
             tables.put("kmeans" + stage,tablaKmeans);
         }
 

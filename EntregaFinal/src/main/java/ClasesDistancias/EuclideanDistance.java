@@ -9,9 +9,9 @@ public class EuclideanDistance implements Distance{
         return calcularMetricaEuclidea(p,q);
     }
 
-    private static Double calcularMetricaEuclidea(List<Double> distancia1, List<Double> distancia2){
+    private static double calcularMetricaEuclidea(List<Double> distancia1, List<Double> distancia2){
         int pos = 0;
-        Double suma = 0D;
+        double suma = 0D;
         int minTamanyo = Math.min(distancia1.size(), distancia2.size());
         while ( pos < minTamanyo){
             suma += Math.pow(distancia2.get(pos) - distancia1.get(pos),2);

@@ -4,11 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74a3b14f-386c-4eb4-927e-ac1d88fe1f61" name="Changes" comment="" />
+    <list default="true" id="74a3b14f-386c-4eb4-927e-ac1d88fe1f61" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesDistancias/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesDistancias/EuclideanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesDistancias/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesDistancias/ManhattanDistance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVLabeledFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVLabeledFileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVUnlabeledFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVUnlabeledFileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/RecSys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/RecSys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/Row.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/SongRecSys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/SongRecSys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controlador/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controlador/ImplementacionControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controlador/ImplementacionControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelo/ImplementacionModelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelo/ImplementacionModelo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelo/Modelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelo/Modelo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVistaPrueba2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vista/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vista/Vista.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QyCEV9zBtTnCaPPCFUfkiBUWRh" />
   <component name="ProjectViewState">
@@ -19,9 +41,21 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn javafx:debug" />
+      <command value="mvn javafx:jlink" />
+      <command value="mvn javafx:run" />
+    </option>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -30,7 +64,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686316322728</updated>
+      <workItem from="1686411439143" duration="12388000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

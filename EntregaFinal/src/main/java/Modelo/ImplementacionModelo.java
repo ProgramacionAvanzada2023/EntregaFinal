@@ -65,19 +65,18 @@ public class ImplementacionModelo implements Modelo{
         for (String stage : stages) {
             CSVLabeledFileReader csv = new CSVLabeledFileReader();
             csv.readTableFromSource(filenames.get("knn" + stage));
-            TableWithLabels tablaKnn = (TableWithLabels) csv.table;
+            TableWithLabels tablaKnn = (TableWithLabels) csv.tabla;
             this.tables.put("knn" + stage,tablaKnn);
 
             csv = new CSVLabeledFileReader();
             csv.readTableFromSource(filenames.get("kmeans" + stage));
-            TableWithLabels tablaKmeans = (TableWithLabels) csv.table;
+            TableWithLabels tablaKmeans = (TableWithLabels) csv.tabla;
             this.tables.put("kmeans" + stage,tablaKmeans);
         }
     }
 
     @Override
-    public void elegirAlgoritmoAndDistancia(AlgorithmEnum algoritmoElegido, DistanceEnum tipoDistancia) throws Exception {
-
+    public void crearAlgoritmo(AlgorithmEnum algoritmoElegido, DistanceEnum tipoDistancia) throws Exception {
         Distance distance = null;
         switch (tipoDistancia){
             case EUCLIDEAN:
@@ -93,7 +92,7 @@ public class ImplementacionModelo implements Modelo{
                 algoritmo = new KNN(distance);
                 break;
             case KMeans:
-                algoritmo = new KMeans(5, 5, 4321, distance);
+                algoritmo = new KMeans(3, 20, 4321, distance);
         }
         this.recSys = new RecSys(algoritmo);
         recSys.train(tables.get(algoritmoElegido.getDescripcion()+"train"));

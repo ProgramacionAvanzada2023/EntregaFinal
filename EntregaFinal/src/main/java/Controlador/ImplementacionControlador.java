@@ -26,8 +26,8 @@ public class ImplementacionControlador implements Controlador{
 	}
 
 	@Override
-	public void elegirAlgoritmoAndDistancia(AlgorithmEnum algoritmo, DistanceEnum tipoDistancia) throws Exception {
-		modelo.elegirAlgoritmoAndDistancia(algoritmo,tipoDistancia);
+	public void crearAlgoritmo(AlgorithmEnum algoritmo, DistanceEnum tipoDistancia) throws Exception {
+		 modelo.crearAlgoritmo(algoritmo,tipoDistancia);
 	}
 
 }

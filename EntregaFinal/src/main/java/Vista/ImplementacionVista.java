@@ -5,12 +5,17 @@ import ClasesPrincipales.AlgorithmEnum;
 import Controlador.ImplementacionControlador;
 import Modelo.ImplementacionModelo;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.ProgressIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,10 +25,11 @@ import java.util.List;
 public class ImplementacionVista implements Vista {
 	private ImplementacionControlador controlador;
 	private ImplementacionModelo modelo;
+
 	private final Stage stage;
 	private AlgorithmEnum tipoAlgoritmoSeleccionado;
 	private DistanceEnum tipoDistanciaSeleccionado;
-	private List<String> listaItemSelecionados = new ArrayList<>();
+	private String itemSelecionado;
 	private List<String> listaCanciones;
 
     public ImplementacionVista(final Stage stage) throws Exception {
@@ -32,6 +38,7 @@ public class ImplementacionVista implements Vista {
 	public ImplementacionControlador getControlador() {
 		return controlador;
 	}
+
 	public void setControlador(ImplementacionControlador controlador) {
 		this.controlador = controlador;
 	}
@@ -39,6 +46,7 @@ public class ImplementacionVista implements Vista {
 	public ImplementacionModelo getModelo() {
 		return modelo;
 	}
+
 	public void setModelo(ImplementacionModelo modelo) {
 		this.modelo = modelo;
 	}
@@ -53,13 +61,12 @@ public class ImplementacionVista implements Vista {
 	public void setTipoDistanciaSeleccionado(DistanceEnum tipoDistanciaSeleccionado) {
 		this.tipoDistanciaSeleccionado = tipoDistanciaSeleccionado;
 	}
-
-	public List<String> getListaItemSelecionados() {
-		return listaItemSelecionados;
+	public String getItemSelecionado() {
+		return itemSelecionado;
 	}
 
-	public void setListaItemSelecionados(List<String> listaItemSelecionados) {
-		this.listaItemSelecionados = listaItemSelecionados;
+	public void setItemSelecionado(String itemSelecionado) {
+		this.itemSelecionado = itemSelecionado;
 	}
 
 	@Override
@@ -104,6 +111,8 @@ public class ImplementacionVista implements Vista {
 		botonKmeans.setToggleGroup(toggleRecommendation);
 		VBox vboxAlgoritmo = new VBox(botonKnn, botonKmeans);
 		vboxAlgoritmo.setSpacing(10);
+		toggleRecommendation.selectToggle(botonKnn);
+		setTipoAlgoritmoSeleccionado(AlgorithmEnum.Knn);
 		return vboxAlgoritmo;
 	}
 
@@ -113,12 +122,14 @@ public class ImplementacionVista implements Vista {
 		distanceManhattan.setToggleGroup(toggleDistancias);
 		HBox hboxDistances = new HBox(distanceEuclidean, distanceManhattan);
 		hboxDistances.setSpacing(10);
+		toggleDistancias.selectToggle(distanceEuclidean);
+		setTipoDistanciaSeleccionado(DistanceEnum.EUCLIDEAN);
 		return hboxDistances;
 	}
 
 	private ListView<String> createListView() {
 		ListView<String> listaSongs = new ListView<>(FXCollections.observableArrayList(listaCanciones));
-		listaSongs.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		listaSongs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		Tooltip tooltip = new Tooltip("Doble click for recommendations based on this song");
 		listaSongs.setTooltip(tooltip);
 		return listaSongs;
@@ -136,26 +147,71 @@ public class ImplementacionVista implements Vista {
 	}
 
 	private void setDistancesButton(RadioButton distanceEuclidean, RadioButton distanceManhattan, ListView<String> listaSongs) {
-		distanceEuclidean.setOnAction(e -> {
-			updateAlgoritmoAndDistancia(DistanceEnum.EUCLIDEAN,listaSongs);
-		});
-
-		distanceManhattan.setOnAction(e -> {
-			updateAlgoritmoAndDistancia(DistanceEnum.MANHATTAN, listaSongs);
-		});
+		distanceEuclidean.setOnAction(e -> { setTipoDistanciaSeleccionado(DistanceEnum.EUCLIDEAN);});
+		distanceManhattan.setOnAction(e -> { setTipoDistanciaSeleccionado(DistanceEnum.MANHATTAN); });
 	}
-	private void updateAlgoritmoAndDistancia(DistanceEnum tipoDistancia, ListView<String> listaSongs){
-		if (getTipoAlgoritmoSeleccionado() != null) {
+	private void cargarAlgoritmo(){
+
+		if (getTipoAlgoritmoSeleccionado() != null && getTipoDistanciaSeleccionado() != null) {
 			try {
-				controlador.elegirAlgoritmoAndDistancia(getTipoAlgoritmoSeleccionado(), tipoDistancia);
-				setTipoDistanciaSeleccionado(tipoDistancia);
-				listaSongs.setItems(FXCollections.observableArrayList(listaCanciones));
+				StackPane root = new StackPane();
+				String mensajeEspera = "Cargando algoritmo. Porfavor espere...";
+				// Crear un ProgressIndicator para mostrar la espera
+				ProgressIndicator progressIndicator = createProgressIndicator(root, mensajeEspera);
+				// Crear un nuevo escenario secundario para mostrar el bloqueo
+				Stage blockingStage = createNewScene(root, mensajeEspera);
+				//Crear tarea
+				Task<Void> task = createTask(blockingStage);
+				//Inicializar hilo con tarea
+				Thread thread = new Thread(task);
+				thread.start();
+
 			} catch (Exception ex) {
 				throw new RuntimeException(ex);
 			}
 		} else {
-			System.err.println("Primero debe seleccionar el tipo de algoritmo");
+			System.err.println("Debe seleccionar el tipo de algoritmo y la distancia");
 		}
+	}
+
+	private Task<Void> createTask(Stage blockingStage) {
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				controlador.crearAlgoritmo(getTipoAlgoritmoSeleccionado(), getTipoDistanciaSeleccionado());
+				return null;
+			}
+		};
+		task.setOnSucceeded(event -> {
+			blockingStage.close();
+			recommendTitles();
+		});
+		return task;
+	}
+
+	private Stage createNewScene(StackPane root, String mensajeEspera) {
+		Stage blockingStage = new Stage();
+		blockingStage.initModality(Modality.APPLICATION_MODAL);
+		blockingStage.initOwner(stage);
+
+		// Establecer la escena del escenario secundario
+		blockingStage.setScene(new Scene(root, 400, 200));
+		blockingStage.setTitle(mensajeEspera);
+		// Mostrar el escenario secundario
+		blockingStage.show();
+		return blockingStage;
+	}
+
+	private static ProgressIndicator createProgressIndicator(StackPane root, String mensajeEspera) {
+		ProgressIndicator progressIndicator = new ProgressIndicator();
+		progressIndicator.setMaxSize(100, 100);
+		Tooltip tooltip = new Tooltip(mensajeEspera);
+		progressIndicator.setTooltip(tooltip);
+		// Centrar el ProgressIndicator en el StackPane
+		StackPane.setAlignment(progressIndicator, Pos.CENTER);
+		// Agregar el ProgressIndicator al StackPane
+		root.getChildren().add(progressIndicator);
+		return progressIndicator;
 	}
 
 	private void setListViewEventHandlers(ListView<String> listaSongs, Button botonRecommend) {
@@ -166,15 +222,13 @@ public class ImplementacionVista implements Vista {
 				if(listaSongs.getSelectionModel().getSelectedItems().isEmpty()){
 					botonRecommend.setDisable(true);
 				}
-				String cancion = listaSongs.getSelectionModel().getSelectedItems().size() > 0 ? (String) listaSongs.getSelectionModel().getSelectedItems().get(0) : "";
-				cancion += listaSongs.getSelectionModel().getSelectedItems().size() > 1 ?  "..." : "";
-				String texto = "Recommend " + cancion;
+
+				String texto = "Recommend " + listaSongs.getSelectionModel().getSelectedItem();
 				botonRecommend.setText(texto);
 			}
 			if(event.getButton() == MouseButton.PRIMARY && restoCamposCompletos && event.getClickCount() == 2 && restoCamposCompletos){
-				listaItemSelecionados = new ArrayList<>();
-				listaItemSelecionados.add((String) listaSongs.getSelectionModel().getSelectedItem());
-				recommendTitles();
+				setItemSelecionado((String) listaSongs.getSelectionModel().getSelectedItem());
+				cargarAlgoritmo();
 			}
 		});
 	}
@@ -182,8 +236,8 @@ public class ImplementacionVista implements Vista {
 	private void setRecommendButtonEventHandler(Button botonRecommend, ListView<String> listaSongs) {
 		botonRecommend.setOnAction(e -> {
 			if(getTipoDistanciaSeleccionado() != null && getTipoAlgoritmoSeleccionado() != null && !listaSongs.getSelectionModel().isEmpty()){
-				listaItemSelecionados = listaSongs.getSelectionModel().getSelectedItems();
-				recommendTitles();
+				setItemSelecionado(listaSongs.getSelectionModel().getSelectedItem());
+				cargarAlgoritmo();
 			}
 		});
 	}
@@ -196,23 +250,23 @@ public class ImplementacionVista implements Vista {
 	}
 
 	private VBox createListOpciones(Label textoLabel, ListView listaOpciones, List<String> listaCancionesParaRecomendar) {
-		listaOpciones.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		listaOpciones.getSelectionModel();//.setSelectionMode(SelectionMode.MULTIPLE);
 		VBox boxLista = new VBox(textoLabel,listaOpciones);
 		return boxLista;
 	}
 
-	private void setCantidadRecomendaciones(Spinner<Integer> number, Alert alerta, ListView listaOpciones){
+	private void setCantidadRecomendaciones(Spinner<Integer> number, ListView listaOpciones){
 		SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = (SpinnerValueFactory.IntegerSpinnerValueFactory) number.getValueFactory();
 		valueFactory.setAmountToStepBy(1);
 		number.getEditor().setOnAction(event -> {
 			int newValue = Integer.parseInt(number.getEditor().getText());
-			updateRecommendations(newValue, alerta, number, valueFactory, listaOpciones);
+			updateRecommendations(newValue, number, valueFactory, listaOpciones);
 		});
 
 		number.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
 				int newValue = valueFactory.getValue();
-				updateRecommendations(newValue, alerta, number, valueFactory, listaOpciones);
+				updateRecommendations(newValue, number, valueFactory, listaOpciones);
 			}
 		});
 	}
@@ -228,8 +282,6 @@ public class ImplementacionVista implements Vista {
 	private void setBotonAtrasAction(Button botonAtras){
 		botonAtras.setOnAction(actionEvent -> {
 			try {
-				setTipoAlgoritmoSeleccionado(null);
-				setTipoDistanciaSeleccionado(null);
 				songRecommend();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
@@ -245,24 +297,21 @@ public class ImplementacionVista implements Vista {
 
 	@Override
 	public void recommendTitles(){
+
 		List<String> listaCancionesParaRecomendar = new ArrayList<>();
 		Label labelNumber = new Label("Number of recommendations:");
 		Spinner<Integer> number = new Spinner<>();
 		HBox boxCantidadRecomendaciones = createNumberRecommendationsHBox(labelNumber, number);
 
-		Label textoLabel = new Label(reportRecommendation(listaItemSelecionados));
+		Label textoLabel = new Label(reportRecommendation(getItemSelecionado()));
 		ListView listaOpciones = new ListView<>(FXCollections.observableArrayList(listaCancionesParaRecomendar));
 		VBox boxLista = createListOpciones(textoLabel, listaOpciones, listaCancionesParaRecomendar);
-
-		Alert alerta = new Alert(Alert.AlertType.WARNING);
-		alerta.setTitle("No recomendaciones disponibles");
-		alerta.setContentText("No hay recomendaciones disponibles para el titulo " + listaItemSelecionados.toString());
 
 		Button botonCerrar = new Button("Close");
 		Button botonAtras = new Button("Atras");
 		HBox boxBotones = new HBox(botonAtras,botonCerrar);
 
-		setCantidadRecomendaciones(number, alerta, listaOpciones);
+		setCantidadRecomendaciones(number, listaOpciones);
 		setListaOpciones(listaOpciones, botonCerrar);
 		setBotonAtrasAction(botonAtras);
 		setBotonCerrarAction(botonCerrar, stage);
@@ -273,7 +322,6 @@ public class ImplementacionVista implements Vista {
 		stage.setScene(scene);
 		stage.setTitle("Recommended titles");
 		stage.show();
-
 	}
 
 	@Override
@@ -281,28 +329,40 @@ public class ImplementacionVista implements Vista {
 		this.listaCanciones = modelo.getListaCanciones();
 	}
 
-	private String reportRecommendation(List<String> recommended_items) {
+	private String reportRecommendation(String recommended_item) {
 		String label = "If you liked \"";
-		for (String name : recommended_items)
-		{
-			label += "\t * "+name;
-		}
+		label += "\t * "+recommended_item;
 		label += "\" then you might like:";
 		return label;
 	}
 
-	private void updateRecommendations(int newValue, Alert alerta, Spinner<Integer> number, SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory, ListView listaOpciones) {
+	private void updateRecommendations(int newValue, Spinner<Integer> number, SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory, ListView listaOpciones) {
 		List<String> listaActualizada = new ArrayList<>();
-
-		for (String cancion : listaItemSelecionados) {
-			listaActualizada.addAll(modelo.listaCancionesRecomendadas(cancion, newValue));
-		}
+		listaActualizada.addAll(modelo.listaCancionesRecomendadas(getItemSelecionado(), newValue));
 
 		if (listaActualizada.isEmpty()) {
+			String titulo = "No recomendaciones disponibles";
+			String contexto = "No hay recomendaciones disponibles para el titulo " + itemSelecionado;
+			Alert alerta = crearAlerta(titulo, contexto);
 			alerta.show();
 			number.getEditor().setText(String.valueOf(valueFactory.getValue()));
 		}
-		listaOpciones.setItems(FXCollections.observableArrayList(listaActualizada));
+		else if(listaActualizada.size() < number.getValue()){
+			String titulo = "Máximo alcanzado";
+			String contexto = "Ha llegado al máximo [" + listaActualizada.size()+"] de canciones recomendadas para la canción " + itemSelecionado;
+			Alert alerta = crearAlerta(titulo, contexto);
+			alerta.show();
+		}else {
+			listaOpciones.setItems(FXCollections.observableArrayList(listaActualizada));
+		}
 	}
+
+	private Alert crearAlerta(String titulo, String contexto){
+		Alert alerta = new Alert(Alert.AlertType.WARNING);
+		alerta.setTitle(titulo);
+		alerta.setContentText(contexto);
+		return alerta;
+	}
+
 
 }

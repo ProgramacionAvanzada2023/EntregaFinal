@@ -30,10 +30,14 @@ public class RecSys {
         List<String> resultadoItems = new ArrayList<>();
         if(indiceLikedItem == -1) { return resultadoItems; }
         int numActual=0;
+        String itemLikedItem = testItemNames.get(indiceLikedItem);
         for (int j = 0; j < listEstimate.size(); j++){
             if(listEstimate.get(j) == labelLikedItem && numActual < numRec && j!= indiceLikedItem) {
-                resultadoItems.add(testItemNames.get(j));
-                numActual++;
+                String item = testItemNames.get(j).trim();
+                if(!resultadoItems.contains(item) && !item.equals(itemLikedItem)) {
+                    resultadoItems.add(item);
+                    numActual++;
+                }
             }
         }
         return resultadoItems;
