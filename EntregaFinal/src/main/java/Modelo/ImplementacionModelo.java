@@ -24,30 +24,20 @@ public class ImplementacionModelo implements Modelo{
     private Map<String,String> filenames;
     private Map<String, Table> tables;
 
-    public ImplementacionModelo() throws IOException {
-        cargarDatosIniciales();
-    }
-
-    public ImplementacionVista getVista() {
-        return vista;
-    }
-
+    public ImplementacionModelo() throws IOException { cargarDatosIniciales(); }
+    public ImplementacionVista getVista() { return vista; }
     public void setVista(ImplementacionVista vista) {
         this.vista = vista;
     }
-
     public Algorithm getAlgoritmo() {
         return algoritmo;
     }
-
     public void setAlgoritmo(Algorithm algorithm) {
         this.algoritmo = algorithm;
     }
-
     public RecSys getRecSys() {
         return recSys;
     }
-
     public void setRecSys(RecSys recSys) {
         this.recSys = recSys;
     }
@@ -92,7 +82,7 @@ public class ImplementacionModelo implements Modelo{
                 algoritmo = new KNN(distance);
                 break;
             case KMeans:
-                algoritmo = new KMeans(3, 20, 4321, distance);
+                algoritmo = new KMeans(5, 5, 4321, distance);
         }
         this.recSys = new RecSys(algoritmo);
         recSys.train(tables.get(algoritmoElegido.getDescripcion()+"train"));

@@ -6,20 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="74a3b14f-386c-4eb4-927e-ac1d88fe1f61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesDistancias/EuclideanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesDistancias/EuclideanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesDistancias/ManhattanDistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesDistancias/ManhattanDistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVLabeledFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVLabeledFileReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVUnlabeledFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/CSVUnlabeledFileReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/RecSys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/RecSys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/Row.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/SongRecSys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasesPrincipales/SongRecSys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controlador/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controlador/ImplementacionControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controlador/ImplementacionControlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Modelo/ImplementacionModelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelo/ImplementacionModelo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelo/Modelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelo/Modelo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vista/ImplementacionVistaPrueba2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vista/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vista/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Modelo/ImplementacionModelo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modelo/ImplementacionModelo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Modelo/ImplementacionModelo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modelo/ImplementacionModelo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Vista/ImplementacionVista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vista/ImplementacionVista.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,18 +28,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn javafx:debug" />
@@ -65,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686316322728</updated>
       <workItem from="1686411439143" duration="12388000" />
+      <workItem from="1686472368088" duration="729000" />
     </task>
     <servers />
   </component>

@@ -32,39 +32,28 @@ public class ImplementacionVista implements Vista {
 	private String itemSelecionado;
 	private List<String> listaCanciones;
 
-    public ImplementacionVista(final Stage stage) throws Exception {
-		this.stage = stage;
-    }
+    public ImplementacionVista(final Stage stage) throws Exception { this.stage = stage; }
 	public ImplementacionControlador getControlador() {
 		return controlador;
 	}
-
 	public void setControlador(ImplementacionControlador controlador) {
 		this.controlador = controlador;
 	}
-
 	public ImplementacionModelo getModelo() {
 		return modelo;
 	}
-
 	public void setModelo(ImplementacionModelo modelo) {
 		this.modelo = modelo;
 	}
-
 	public AlgorithmEnum getTipoAlgoritmoSeleccionado() {
 		return tipoAlgoritmoSeleccionado;
 	}
-	public void setTipoAlgoritmoSeleccionado(AlgorithmEnum tipoAlgoritmoSeleccionado) {
-		this.tipoAlgoritmoSeleccionado = tipoAlgoritmoSeleccionado;
-	}
+	public void setTipoAlgoritmoSeleccionado(AlgorithmEnum tipoAlgoritmoSeleccionado) { this.tipoAlgoritmoSeleccionado = tipoAlgoritmoSeleccionado;}
 	public DistanceEnum getTipoDistanciaSeleccionado() {return tipoDistanciaSeleccionado; }
-	public void setTipoDistanciaSeleccionado(DistanceEnum tipoDistanciaSeleccionado) {
-		this.tipoDistanciaSeleccionado = tipoDistanciaSeleccionado;
-	}
+	public void setTipoDistanciaSeleccionado(DistanceEnum tipoDistanciaSeleccionado) { this.tipoDistanciaSeleccionado = tipoDistanciaSeleccionado;}
 	public String getItemSelecionado() {
 		return itemSelecionado;
 	}
-
 	public void setItemSelecionado(String itemSelecionado) {
 		this.itemSelecionado = itemSelecionado;
 	}
@@ -170,7 +159,7 @@ public class ImplementacionVista implements Vista {
 				throw new RuntimeException(ex);
 			}
 		} else {
-			System.err.println("Debe seleccionar el tipo de algoritmo y la distancia");
+			System.err.println("Debe seleccionar el tipo de algoritmo y la distancia primero");
 		}
 	}
 
